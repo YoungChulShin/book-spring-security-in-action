@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS `spring`.`users`;
+DROP TABLE IF EXISTS `spring`.`authorities`;
+
 CREATE TABLE IF NOT EXISTS `spring`.`users` (
     `id`        INT         NOT NULL AUTO_INCREMENT,
     `username`  VARCHAR(45) NOT NULL,
