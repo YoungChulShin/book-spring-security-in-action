@@ -1,6 +1,5 @@
 package study.spring.security.ch5ex1.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,6 +44,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
   @Override
   public boolean supports(Class<?> authentication) {
-    return false;
+    return true;
   }
 }
