@@ -1,5 +1,6 @@
 # 설명
-커스텀 `AuthenticationProvider`를 구현해봅니다.
+1. 커스텀 `AuthenticationProvider`를 구현해봅니다.
+2. 비동기 Thread로 SecurityContext가 전파되는 방법을 알아봅니다. 
 
 # 사용
 ## Custom AuthenticationProvider 구현
