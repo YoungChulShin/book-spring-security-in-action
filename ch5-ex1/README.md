@@ -35,3 +35,23 @@ SecurityFilterChain에 Custom AuthenticationProvider 등록
    ```
 - 참고 자료: https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
 
+## 비동기 Thread로 SecurityContext 전파
+`DelegatingSecurityContextExecutorService`를 이용하면 현재 스레드의 SecurityContext를 가져와서 새로운 스레드에서 사용할 수 있도록 한다. 
+```java
+ExecutorService executorService = Executors.newCachedThreadPool();
+// 생성자에 명시적으로 SecurityContext를 넘겨주지 않으면 'SecurityContextHolder.getContext()'를 호출한다
+executorService = new DelegatingSecurityContextExecutorService(executorService);
+```
+
+## 인증 실패 시 응답 값 조정
+`AuthenticationEntryPoint` 인터페이스를 구현해서 응답 값을 수정할 수 있다.
+- 해당 인터페이스는 필터 체인에서 투척된 모든 'AccessDeniedException' 및 'AuthenticationException'을 처리한다
+
+생성한 AuthenticationEntryPoint 구현체는 'SecurityFilterChain'의 'httpBasic'에 등록해준다. 
+```java
+http
+   .httpBasic(c -> {
+      c.authenticationEntryPoint(new CustomEntryPoint());
+   })
+```
+
