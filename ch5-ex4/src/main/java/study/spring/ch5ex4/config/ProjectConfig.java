@@ -16,6 +16,7 @@ public class ProjectConfig {
           c.successHandler(new CustomAuthenticationSuccessHandler());
           c.failureHandler(new CustomAuthenticationFailureHandler());
         })
+        .httpBasic(c -> { })
         .authorizeHttpRequests(c -> c.anyRequest().authenticated());
 
     return http.build();
