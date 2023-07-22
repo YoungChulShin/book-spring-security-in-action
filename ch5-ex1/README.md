@@ -1,6 +1,7 @@
 # 설명
 1. 커스텀 `AuthenticationProvider`를 구현해봅니다.
 2. 비동기 Thread로 SecurityContext가 전파되는 방법을 알아봅니다. 
+3. 인증이 실패했을 때, 응답 데이터를 추가 구성하는 방법을 알아봅니다. 
 
 # 사용
 ## Custom AuthenticationProvider 구현
@@ -15,6 +16,9 @@ CustomAuthenticationProvider 클래스
 4. `supports()` 메서드를 구현한다
    - 이 메서드를 통해서 여러 인증 방법에 대해서 대응될 수 있도록 할 수 있다
 5. `CustomAuthenticationProvider`를 SecurityFilterChain에 등록한다
+
+추가되는 `AuthenticationProvider`는 내부적으로 `AuthenticationManager`가 가지고 있는 `List<AuthenticationProvider>`에 등록된다. 
+
 
 SecurityFilterChain에 Custom AuthenticationProvider 등록
 - 'WebSecurityConfigureAdapter'가 Deprecated되었기 때문에, `SecurityFilterChain`을 반환하는 빈을 등록한다
