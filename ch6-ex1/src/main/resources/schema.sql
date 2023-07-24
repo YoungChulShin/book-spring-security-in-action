@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `spring`.`user` (
     `id`        INT         NOT NULL AUTO_INCREMENT,
     `username`  VARCHAR(45) NOT NULL,
     `password`  TEXT        NOT NULL,
-    `althrithm` VARCHAR(45) NOT NULL,
+    `algorithm` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
