@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
 @Configuration
-public class ProjectConfig {
+public class SecurityConfig {
 
   @Bean
   public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -17,6 +17,4 @@ public class ProjectConfig {
   public SCryptPasswordEncoder sCryptPasswordEncoder() {
     return SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8();
   }
-
-
 }
