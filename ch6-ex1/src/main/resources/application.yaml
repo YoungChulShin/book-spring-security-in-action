@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: user
+    password: user_password
+    url: jdbc:mysql://localhost:3306/spring?userLegacyDatetimeCode=false&serverTimezone=UTC
+  sql:
+    init:
+      mode: always
