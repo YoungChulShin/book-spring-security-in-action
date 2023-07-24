@@ -10,9 +10,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 import study.spring.security.ch6ex1.domain.enums.EncryptionAlgorithm;
 
 @Entity
+@Getter
 public class User {
 
   @Id
