@@ -18,4 +18,5 @@ public class ProjectConfig {
     return SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8();
   }
 
+
 }
