@@ -25,8 +25,20 @@ public class ProjectConfig {
         .authorities("WRITE")
         .build();
 
+    var userManager = User.withUsername("ycshin-m")
+        .password("12345")
+        .roles("MANAGER")
+        .build();
+
+    var userCutomer = User.withUsername("minj-c")
+        .password("12345")
+        .roles("CUSTOMER")
+        .build();
+
     manager.createUser(user1);
     manager.createUser(user2);
+    manager.createUser(userManager);
+    manager.createUser(userCutomer);
 
     return manager;
   }
