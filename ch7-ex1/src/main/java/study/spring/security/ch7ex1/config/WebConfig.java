@@ -11,9 +11,22 @@ public class WebConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    // WRITE 권한만 허용
     return http
         .httpBasic(Customizer.withDefaults())
         .authorizeHttpRequests(c -> c.anyRequest().hasAuthority("WRITE"))
         .build();
+
+    // WRITE와 READ중 하나라도 가지고 있으면 허용
+//    return http
+//        .httpBasic(Customizer.withDefaults())
+//        .authorizeHttpRequests(c -> c.anyRequest().hasAnyAuthority("WRITE", "READ"))
+//        .build();
+
+//    String expression = "hasAuthority('read') and !hasAuthority('delete')";
+//    return http
+//        .httpBasic(Customizer.withDefaults())
+//        .authorizeHttpRequests(c -> c.anyRequest().access(expression))
+//        .build();
   }
 }
