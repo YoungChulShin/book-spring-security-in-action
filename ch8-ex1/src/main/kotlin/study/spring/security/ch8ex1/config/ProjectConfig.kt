@@ -2,6 +2,7 @@ package study.spring.security.ch8ex1.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.core.userdetails.User
@@ -44,7 +45,13 @@ class ProjectConfig {
             .authorizeHttpRequests {
                 it.requestMatchers("/hello").hasRole("ADMIN")
                 it.requestMatchers("/ciao").hasRole("MANAER")
-                it.anyRequest().authenticated()
+                it.requestMatchers(HttpMethod.GET, "/a").authenticated()
+                it.requestMatchers(HttpMethod.POST, "/a").permitAll()
+                it.requestMatchers(HttpMethod.GET, "/a/b/**").authenticated()
+                it.anyRequest().denyAll()
+            }
+            .csrf {
+                it.disable()
             }
             .build()
     }
