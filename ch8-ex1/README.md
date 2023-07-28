@@ -2,7 +2,7 @@
 특정 그룹에 제한을 적용하는 방법을 알아본다.
 
 # 사용
-## URL 패턴을 이용한 권한 설정
+## 1. URL 패턴을 이용한 권한 설정
 샘플 코드
 ```kotlin
 .authorizeHttpRequests {
@@ -12,7 +12,7 @@
 }
 ```
 
-## HTTP Method와 URL 패턴을 이용한 권한 설정
+## 2. HTTP method와 URL 패턴을 이용한 권한 설정
 샘플 코드
 ```kotlin
 .authorizeHttpRequests {
