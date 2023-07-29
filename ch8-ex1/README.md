@@ -2,7 +2,15 @@
 특정 그룹에 제한을 적용하는 방법을 알아본다.
 
 # 사용
-## 1. URL 패턴을 이용한 권한 설정
+## SpringSecurity 5.8 이전
+`mvcMatchers`, `antMatchers`, `regexMathers`를 통해서 처리 가능.
+
+## SpringSecurity 5.8
+`requestMatchers`로 모두 변경되었다. 
+- 마이그레이션 가이드: https://docs.spring.io/spring-security/reference/5.8/migration/servlet/config.html#use-new-requestmatchers
+
+
+### 1. URL 패턴을 이용한 권한 설정
 샘플 코드
 ```kotlin
 .authorizeHttpRequests {
@@ -12,7 +20,7 @@
 }
 ```
 
-## 2. HTTP method와 URL 패턴을 이용한 권한 설정
+### 2. HTTP method와 URL 패턴을 이용한 권한 설정
 샘플 코드
 ```kotlin
 .authorizeHttpRequests {
