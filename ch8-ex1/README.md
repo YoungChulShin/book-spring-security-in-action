@@ -33,3 +33,14 @@
     it.anyRequest().denyAll()
 }
 ```
+
+### 3. Regex를 이용한 권한 설정
+`RegexRequestMatcher`를 전달해서 정규식을 표현할 수 있다.
+
+샘플 코드
+```kotlin
+it.requestMatchers(
+    RegexRequestMatcher.regexMatcher(".*/(us|uk|ca)+/(en|fr).*")
+).authenticated()
+it.requestMatchers("/video/**").hasAuthority("premium")
+```
