@@ -20,7 +20,7 @@ class RequestValidationFilter: Filter {
 
         val requestId = httpRequest.getHeader("Request-Id")
 
-        if (requestId.isBlank()) {
+        if (requestId == null || requestId.isBlank()) {
             httpResponse.status = HttpServletResponse.SC_BAD_REQUEST
             return
         }
