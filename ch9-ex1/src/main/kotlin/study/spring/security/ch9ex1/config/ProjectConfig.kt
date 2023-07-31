@@ -15,6 +15,9 @@ class ProjectConfig {
             .addFilterBefore(
                 RequestValidationFilter(),
                 BasicAuthenticationFilter::class.java)
+            .addFilterAfter(
+                AuthenticationLoggingFilter(),
+                BasicAuthenticationFilter::class.java)
             .authorizeHttpRequests {
                 it.anyRequest().permitAll()
             }
