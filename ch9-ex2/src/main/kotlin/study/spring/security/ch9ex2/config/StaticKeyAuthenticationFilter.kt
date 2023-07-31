@@ -6,12 +6,11 @@ import jakarta.servlet.ServletRequest
 import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
 class StaticKeyAuthenticationFilter(
-    @Value("\${authorization.key}") val authorizationKey: String
+    val authorizationKey: AuthorizationKey,
 ): Filter{
 
     override fun doFilter(
@@ -23,7 +22,7 @@ class StaticKeyAuthenticationFilter(
         val httpResponse = response as HttpServletResponse
         val authorization = httpRequest.getHeader("Authorization")
 
-        if (authorizationKey == authorization) {
+        if (authorizationKey.key == authorization) {
             chain.doFilter(request, response)
         } else {
             httpResponse.status = HttpServletResponse.SC_UNAUTHORIZED
