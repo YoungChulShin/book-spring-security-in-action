@@ -10,8 +10,8 @@ GET 요청이 아닌 POST, PUT, DELETE 요청의 경우는, csrf가 활성화 �
 <input name="_csrf" type="hidden" value="V5kWApBulP3HnIYSV-Z66yY7O9YWyR14JgCkNx8zadEUnFiXb6gvNKRerM7qpL8kbstO2UQLFrch-ChVFGbCVS8CCugs-mD1">
 ```
 
-## csrf 통과하기
-제일 간단하게는 `SecurityFilterChain`에서 csrf를 비활성화하면 된다. 그게 아니라면 변경 요청에 대해서 csrf 토큰을 전달해야한다. 
+## csrf 처리하기
+변경 요청에 대해서 csrf 토큰을 전달해야한다.
 
 이 예제에서는 `main.html` 화면에 hidden 타입의 input을 선언하고, 그 안에 설정된 csrs 값을 넣어주는 방법을 사용했다. 
 ```html
@@ -26,3 +26,22 @@ GET 요청이 아닌 POST, PUT, DELETE 요청의 경우는, csrf가 활성화 �
          th:value="${_csrf.token}"/>
 </form>
 ```
+
+## csrf 제외하기
+제일 간단하게는 `SecurityFilterChain`에서 csrf를 비활성화하면 된다. 그게 아니라면 예외를 등록해줄 수 있다. 
+
+`ignoringRequestMatchers` 메서드에 대상의 패턴을 등록해주면 된다. 
+```java
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    return http
+        .csrf(c -> {
+            // /hello 요청에 대해서 csrf 토큰 체크를 예외처리한다.
+            var handlerMappingIntrospector = new HandlerMappingIntrospector();
+            var mvcRequestMatcher = new MvcRequestMatcher(handlerMappingIntrospector, "/hello");
+            c.ignoringRequestMatchers(mvcRequestMatcher);
+        })
+        .build();
+  }
+```
+
