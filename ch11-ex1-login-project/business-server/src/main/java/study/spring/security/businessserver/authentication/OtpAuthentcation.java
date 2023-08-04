@@ -1,4 +1,4 @@
-package study.spring.security.businessserver.authentication.provider;
+package study.spring.security.businessserver.authentication;
 
 import java.util.Collection;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,7 +10,9 @@ public class OtpAuthentcation extends UsernamePasswordAuthenticationToken {
     super(principal, credentials);
   }
 
-  public OtpAuthentcation(Object principal, Object credentials,
+  public OtpAuthentcation(
+      Object principal,
+      Object credentials,
       Collection<? extends GrantedAuthority> authorities) {
     super(principal, credentials, authorities);
   }

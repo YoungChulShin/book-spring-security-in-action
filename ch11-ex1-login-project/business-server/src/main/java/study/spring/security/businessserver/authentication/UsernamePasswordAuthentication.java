@@ -1,4 +1,4 @@
-package study.spring.security.businessserver.authentication.provider;
+package study.spring.security.businessserver.authentication;
 
 import java.util.Collection;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
