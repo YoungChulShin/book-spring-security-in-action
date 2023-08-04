@@ -14,19 +14,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.filter.OncePerRequestFilter;
-import study.spring.security.businessserver.authentication.OtpAuthentcation;
+import study.spring.security.businessserver.authentication.OtpAuthentication;
 import study.spring.security.businessserver.authentication.UsernamePasswordAuthentication;
 
 public class InitialAuthenticationFilter extends OncePerRequestFilter {
 
   private final AuthenticationManager manager;
-  private final String singingKey;
+  private final String signingKey;
 
   public InitialAuthenticationFilter(
       AuthenticationManager manager,
       @Value("${jwt.signing.key") String signingKey) {
     this.manager = manager;
-    this.singingKey = signingKey;
+    this.signingKey = signingKey;
   }
 
   @Override
@@ -42,10 +42,10 @@ public class InitialAuthenticationFilter extends OncePerRequestFilter {
       Authentication authentication = new UsernamePasswordAuthentication(username, password);
       manager.authenticate(authentication);
     } else {
-      Authentication authentication = new OtpAuthentcation(username, code);
+      Authentication authentication = new OtpAuthentication(username, code);
       manager.authenticate(authentication);
 
-      SecretKey key = Keys.hmacShaKeyFor(singingKey.getBytes(StandardCharsets.UTF_8));
+      SecretKey key = Keys.hmacShaKeyFor(signingKey.getBytes(StandardCharsets.UTF_8));
       String jwt = Jwts.builder()
           .setClaims(Map.of("username", username))
           .signWith(key)

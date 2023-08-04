@@ -5,7 +5,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
-import study.spring.security.businessserver.authentication.OtpAuthentcation;
+import study.spring.security.businessserver.authentication.OtpAuthentication;
 import study.spring.security.businessserver.authentication.proxy.AuthenticationServerProxy;
 
 @Component
@@ -26,7 +26,7 @@ public class OtpAuthenticationProvider implements AuthenticationProvider {
     boolean result = proxy.sendOtp(username, code);
 
     if (result) {
-      return new OtpAuthentcation(username, code);
+      return new OtpAuthentication(username, code);
     } else {
       throw new BadCredentialsException("Bad credentials.");
     }
