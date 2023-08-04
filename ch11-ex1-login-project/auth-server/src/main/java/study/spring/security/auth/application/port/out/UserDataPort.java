@@ -7,4 +7,6 @@ public interface UserDataPort {
 
   Optional<User> findUserByName(String username);
 
+  User saveUser(User user);
+
 }

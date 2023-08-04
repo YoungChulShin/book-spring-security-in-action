@@ -18,4 +18,9 @@ class UserPersistenceAdapter implements UserDataPort {
   public Optional<User> findUserByName(String username) {
     return jpaPersistenceAdapter.findById(username);
   }
+
+  @Override
+  public User saveUser(User user) {
+    return jpaPersistenceAdapter.save(user);
+  }
 }
