@@ -1,6 +1,8 @@
 package study.spring.security.auth.application.service;
 
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import study.spring.security.auth.util.GenerateCodeUtil;
 
 @Service
 class UserService implements UserUseCase {
+
+  private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
   private final PasswordEncoder passwordEncoder;
   private final UserDataPort userDataPort;
@@ -40,8 +44,8 @@ class UserService implements UserUseCase {
         .orElseThrow(() -> new BadCredentialsException("Bad credentials"));
 
     if (passwordEncoder.matches(targetUser.getPassword(), user.getPassword())) {
-      renewOtp(user);
-      // send SMS to user with new otp code
+      String code = renewOtp(user);
+      sendSms(user.getUsername(), code);
     } else {
       throw new BadCredentialsException("Bad credentials");
     }
@@ -57,7 +61,7 @@ class UserService implements UserUseCase {
     return userOtp.get().getCode().equals(otpToValidate.getCode());
   }
 
-  private void renewOtp(User user) {
+  private String renewOtp(User user) {
     String code = GenerateCodeUtil.generateCode();
 
     Optional<Otp> userOtp = otpDataPort.findOtpByUsername(user.getUsername());
@@ -68,5 +72,12 @@ class UserService implements UserUseCase {
       Otp otp = new Otp(user.getUsername(), code);
       otpDataPort.saveOtp(otp);
     }
+
+    return code;
+  }
+
+  private void sendSms(String username, String code) {
+    // send SMS to user with new otp code
+    logger.info("Send sms to " + username + ". otp code: " + code);
   }
 }
