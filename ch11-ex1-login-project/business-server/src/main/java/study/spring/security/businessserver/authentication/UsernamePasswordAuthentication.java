@@ -7,11 +7,13 @@ import org.springframework.security.core.GrantedAuthority;
 public class UsernamePasswordAuthentication extends UsernamePasswordAuthenticationToken {
 
   public UsernamePasswordAuthentication(Object principal, Object credentials) {
+    // setAuthenticated(false);
     super(principal, credentials);
   }
 
   public UsernamePasswordAuthentication(Object principal, Object credentials,
       Collection<? extends GrantedAuthority> authorities) {
+    // super.setAuthenticated(true)
     super(principal, credentials, authorities);
   }
 }
