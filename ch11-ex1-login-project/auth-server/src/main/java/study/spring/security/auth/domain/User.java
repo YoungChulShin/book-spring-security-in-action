@@ -13,6 +13,8 @@ public class User {
 
   private String password;
 
+  protected User() { }
+
   public String getUsername() {
     return username;
   }

@@ -11,11 +11,22 @@ public class Otp {
 
   private String code;
 
+  public Otp(String username, String code) {
+    this.username = username;
+    this.code = code;
+  }
+
+  protected Otp() { }
+
   public String getUsername() {
     return username;
   }
 
   public String getCode() {
     return code;
+  }
+
+  public void updateCode(String newCode) {
+    this.code = newCode;
   }
 }

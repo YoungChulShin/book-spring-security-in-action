@@ -6,4 +6,6 @@ import study.spring.security.auth.domain.Otp;
 public interface OtpDataPort {
 
   Optional<Otp> findOtpByUsername(String username);
+
+  Otp saveOtp(Otp otp);
 }

@@ -18,4 +18,9 @@ class OtpPersistenceAdapter implements OtpDataPort {
   public Optional<Otp> findOtpByUsername(String username) {
     return jpaPersistenceAdapter.findById(username);
   }
+
+  @Override
+  public Otp saveOtp(Otp otp) {
+    return jpaPersistenceAdapter.save(otp);
+  }
 }

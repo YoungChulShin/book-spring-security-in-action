@@ -6,4 +6,6 @@ public interface UserUseCase {
 
   void addUser(User user);
 
+  void auth(User user);
+
 }
