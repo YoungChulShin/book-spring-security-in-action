@@ -47,6 +47,16 @@ class UserService implements UserUseCase {
     }
   }
 
+  @Override
+  public boolean check(Otp otpToValidate) {
+    Optional<Otp> userOtp = otpDataPort.findOtpByUsername(otpToValidate.getUsername());
+    if (userOtp.isEmpty()) {
+      return false;
+    }
+
+    return userOtp.get().getCode().equals(otpToValidate.getCode());
+  }
+
   private void renewOtp(User user) {
     String code = GenerateCodeUtil.generateCode();
 
