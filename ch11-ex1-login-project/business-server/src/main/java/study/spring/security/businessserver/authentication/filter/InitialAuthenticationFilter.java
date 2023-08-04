@@ -12,20 +12,23 @@ import java.util.Map;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import study.spring.security.businessserver.authentication.OtpAuthentication;
 import study.spring.security.businessserver.authentication.UsernamePasswordAuthentication;
 
+@Component
 public class InitialAuthenticationFilter extends OncePerRequestFilter {
 
   private final AuthenticationManager manager;
   private final String signingKey;
 
   public InitialAuthenticationFilter(
-      AuthenticationManager manager,
-      @Value("${jwt.signing.key") String signingKey) {
-    this.manager = manager;
+      AuthenticationConfiguration authenticationConfiguration,
+      @Value("${jwt.signing.key") String signingKey) throws Exception {
+    this.manager = authenticationConfiguration.getAuthenticationManager();
     this.signingKey = signingKey;
   }
 
