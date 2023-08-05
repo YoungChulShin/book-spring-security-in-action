@@ -25,7 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private final String signingKey;
 
   public JwtAuthenticationFilter(
-      @Value("${jwt.signing.key") String signingKey) {
+      @Value("${jwt.signing.key}") String signingKey) {
     this.signingKey = signingKey;
   }
 
@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     Claims claims = Jwts.parserBuilder()
         .setSigningKey(key)
         .build()
-        .parseClaimsJwt(jwt)
+        .parseClaimsJws(jwt)
         .getBody();
 
     String username = String.valueOf(claims.get("username"));

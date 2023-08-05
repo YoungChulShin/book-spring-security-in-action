@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -26,9 +25,9 @@ public class InitialAuthenticationFilter extends OncePerRequestFilter {
   private final String signingKey;
 
   public InitialAuthenticationFilter(
-      AuthenticationConfiguration authenticationConfiguration,
-      @Value("${jwt.signing.key") String signingKey) throws Exception {
-    this.manager = authenticationConfiguration.getAuthenticationManager();
+      AuthenticationManager authenticationManager,
+      @Value("${jwt.signing.key}") String signingKey) {
+    this.manager = authenticationManager;
     this.signingKey = signingKey;
   }
 

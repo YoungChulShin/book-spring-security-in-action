@@ -34,6 +34,6 @@ public class OtpAuthenticationProvider implements AuthenticationProvider {
 
   @Override
   public boolean supports(Class<?> authentication) {
-    return OtpAuthenticationProvider.class.isAssignableFrom(authentication);
+    return OtpAuthentication.class.isAssignableFrom(authentication);
   }
 }

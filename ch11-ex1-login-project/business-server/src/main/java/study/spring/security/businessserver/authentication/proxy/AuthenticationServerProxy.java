@@ -15,7 +15,7 @@ public class AuthenticationServerProxy {
 
   public AuthenticationServerProxy(
       RestTemplate rest,
-      @Value("${auth.server.base.url") String baseUrl) {
+      @Value("${auth.server.base.url}") String baseUrl) {
     this.rest = rest;
     this.baseUrl = baseUrl;
   }
