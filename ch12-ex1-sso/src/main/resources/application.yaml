@@ -1,0 +1,6 @@
+
+application:
+  login:
+    oauth2:
+      client_id: clientId
+      client_secret: clientSecret
