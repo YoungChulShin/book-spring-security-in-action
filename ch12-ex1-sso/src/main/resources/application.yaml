@@ -4,3 +4,12 @@ application:
     oauth2:
       client_id: clientId
       client_secret: clientSecret
+
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          github:
+#            client-id: ddd
+#            client-secret: eee
