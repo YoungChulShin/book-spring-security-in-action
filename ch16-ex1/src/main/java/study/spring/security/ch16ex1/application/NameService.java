@@ -13,6 +13,8 @@ public class NameService {
     return "Fantastico";
   }
 
+  // @PreAuthorize("#name == authentication.principal.username && hasAuthority('write')")
+  @PreAuthorize("#name == authentication.principal.username")
   public List<String> secretNames(String name) {
     return secretNames.get(name);
   }
