@@ -13,6 +13,12 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class SecurityConfig {
 
+  private final DocumentPermissionEvaluator documentPermissionEvaluator;
+
+  public SecurityConfig(DocumentPermissionEvaluator documentPermissionEvaluator) {
+    this.documentPermissionEvaluator = documentPermissionEvaluator;
+  }
+
   @Bean
   public UserDetailsService userDetailsService() {
     var service = new InMemoryUserDetailsManager();
@@ -41,7 +47,7 @@ public class SecurityConfig {
   @Bean
   public MethodSecurityExpressionHandler methodSecurityExpressionHandler() {
     var expressionHandler = new DefaultMethodSecurityExpressionHandler();
-    expressionHandler.setPermissionEvaluator(new DocumentPermissionEvaluator());
+    expressionHandler.setPermissionEvaluator(documentPermissionEvaluator);
 
     return expressionHandler;
   }
