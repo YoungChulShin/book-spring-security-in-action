@@ -8,9 +8,9 @@ public class DocumentRepository {
 
   private Map<String, Document> documents =
       Map.of(
-          "abc123", new Document("natalie"),
-          "qwe123", new Document("natalie"),
-          "asd555", new Document("emma"));
+          "abc123", new Document("ycshin"),
+          "qwe123", new Document("ycshin"),
+          "asd555", new Document("mjseo"));
 
   public Document findDocument(String code) {
     return documents.get(code);
