@@ -1,8 +1,6 @@
 package study.spring.ch6ex12.service;
 
-import java.util.Optional;
 import java.util.function.Supplier;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,7 @@ public class JpaUserDetailsService implements UserDetailsService {
   }
 
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+  public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Supplier<UsernameNotFoundException> s =
         () -> new UsernameNotFoundException("Problem during authentication");
 
