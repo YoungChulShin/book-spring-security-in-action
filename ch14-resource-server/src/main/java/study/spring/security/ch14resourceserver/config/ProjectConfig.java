@@ -10,10 +10,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ProjectConfig {
 
   private final String keySetUri;
+  private final JwtAuthenticationConverter converter;
 
   public ProjectConfig(
-      @Value("${application.security.key-set-uri}") String keySetUri) {
+      @Value("${application.security.key-set-uri}") String keySetUri,
+      JwtAuthenticationConverter converter) {
     this.keySetUri = keySetUri;
+    this.converter = converter;
   }
 
   @Bean
@@ -25,6 +28,7 @@ public class ProjectConfig {
         .oauth2ResourceServer(c -> {
           c.jwt(j -> {
             j.jwkSetUri(keySetUri);
+            j.jwtAuthenticationConverter(converter);
           });
         });
 
