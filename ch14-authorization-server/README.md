@@ -2,7 +2,7 @@
 Spring Security Oauth를 이용해서 Authorization Server를 구현합니다. 
 
 # 기능 설명
-## 요청
+## Authorization code 인증
 ### 요청 순서
 1. Authorization Code 요청
 2. Access Token 요청
@@ -88,3 +88,39 @@ challenge
 - verifier를 해시(예: SHA-256) 한 값
 - authorization code를 요청할 때 클라이언트가 authorization server로 전달한다.
 
+
+## Client Credentials 인증
+### 요청 순서
+`client credentials`는 별도의 순서 없이 `client id` + `client secret` 을 이용해서 요청하면 access token을 발급 받을 수 있다. 
+
+### Access token 요청
+요청 항목
+- grant_type: client_credentials
+- scope: openid
+
+요청 샘플
+```
+curl --location 'http://localhost:8080/oauth2/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: ••••••' \
+--data-urlencode 'grant_type=client_credentials' \
+--data-urlencode 'scope=openid'
+```
+
+응답 샘플
+```
+{
+    "access_token": "eyJraWQiOiI2NGIwNDVlOC1iYTgzLTRkZGItYWY0Ny1iYjc2ODQyZmNlZTQiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJhdWQiOiJjbGllbnQiLCJuYmYiOjE3NDAwNjMzODMsInNjb3BlIjpbIm9wZW5pZCJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJleHAiOjE3NDAwNjM2ODMsImlhdCI6MTc0MDA2MzM4MywianRpIjoiMTM4OTUyNGItYjkzMS00OWQwLWEzOGUtZmE5M2Y0ZTdjOTcyIn0.XXzfuSE7Lqmy-6Y1x1yqPgGqTk5B53Mfho4Krx-52O7d7ruva9UrRo-QLiexKZhLok8QHirIDEULtEoq88jwOmJzfFQAx9SvZ8jOB9e66esnEhNKlyOr3lR6IrjLsC5EuNILQARU4XNkSYFDF1zUq5DLIIn-_ZCt3egUwPE2B4xnqfuryPB9IvSyEWyW8zigkBTtSOvFo7cRoVcVf_tOMfdnBONI9BzvIi1Zipv8A8liefRx1mfJ4Dqwz3hDgyr0dEOWOXbWql74NNIitEFL5Von4-QUFtPNFJ8ttbui_RR94-_FO7W7tr3tagr-pIOkWdgzVTRaZfXD7B4aRbiYMA",
+    "scope": "openid",
+    "token_type": "Bearer",
+    "expires_in": 299
+}
+```
+
+## Token 비활성화
+### 요청 정보
+`oauth2/revoke` url에 관련 정보를 포함해서 전달한다. 
+
+요청 항목
+- token: 토큰 정보
+- basic auth 헤더
