@@ -99,14 +99,14 @@ public class SecurityConfig {
               grantTypes.add(AuthorizationGrantType.CLIENT_CREDENTIALS);
               grantTypes.add(AuthorizationGrantType.REFRESH_TOKEN);
             })
-            .tokenSettings(
-                TokenSettings.builder()
-                    .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
-                    .accessTokenTimeToLive(Duration.ofMinutes(5L))
-                    .refreshTokenTimeToLive(Duration.ofHours(1L))
-                    .build()
-
-            )
+//            .tokenSettings(
+//                TokenSettings.builder()
+//                    .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
+//                    .accessTokenTimeToLive(Duration.ofMinutes(5L))
+//                    .refreshTokenTimeToLive(Duration.ofHours(1L))
+//                    .build()
+//
+//            )
             .redirectUri("https://www.manning.com/authorized")
             // Defines a purpose for the request of an access token.
             // The scope can be used later in authorization rules.
