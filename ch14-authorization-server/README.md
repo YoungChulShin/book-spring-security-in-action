@@ -123,4 +123,4 @@ curl --location 'http://localhost:8080/oauth2/token' \
 
 요청 항목
 - token: 토큰 정보
-- basic auth 헤더
+- basic auth 헤더 
