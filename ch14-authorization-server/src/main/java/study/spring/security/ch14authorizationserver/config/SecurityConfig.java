@@ -102,21 +102,33 @@ public class SecurityConfig {
               grantTypes.add(AuthorizationGrantType.CLIENT_CREDENTIALS);
               grantTypes.add(AuthorizationGrantType.REFRESH_TOKEN);
             })
-//            .tokenSettings(
-//                TokenSettings.builder()
-//                    .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
-//                    .accessTokenTimeToLive(Duration.ofMinutes(5L))
-//                    .refreshTokenTimeToLive(Duration.ofHours(1L))
-//                    .build()
-//
-//            )
+            .tokenSettings(
+                TokenSettings.builder()
+                    .accessTokenFormat(OAuth2TokenFormat.REFERENCE)  // SELF_CONTAINED: non opaque
+                    .accessTokenTimeToLive(Duration.ofMinutes(5L))
+                    .refreshTokenTimeToLive(Duration.ofHours(1L))
+                    .build()
+
+            )
             .redirectUri("https://www.manning.com/authorized")
             // Defines a purpose for the request of an access token.
             // The scope can be used later in authorization rules.
             .scope(OidcScopes.OPENID)
             .build();
 
-    return new InMemoryRegisteredClientRepository(registeredClient);
+
+    RegisteredClient resourceServer =
+        RegisteredClient
+            .withId(UUID.randomUUID().toString())
+            .clientId("resource_server")
+            .clientSecret("resource_server_secret")
+            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+            .build();
+
+    return new InMemoryRegisteredClientRepository(
+        registeredClient,
+        resourceServer);
   }
 
 //  @Bean
