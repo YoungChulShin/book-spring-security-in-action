@@ -12,3 +12,20 @@ spring:
           github:
             client-id: test
             client-secret: password
+          my_authorization_server:
+            client-name: my server
+            client-id: client2
+            client-secret: secret2
+            provider: my_authorization_server
+            client-authentication-method: client_secret_basic
+            redirect-uri: http://localhost:6060/login/oauth2/code/my_authorization_server
+            scope:
+              - openid
+
+        provider:
+          my_authorization_server:
+            issuer-uri: http://127.0.0.1:8080
+
+logging:
+  level:
+    org.springframework.security: TRACE

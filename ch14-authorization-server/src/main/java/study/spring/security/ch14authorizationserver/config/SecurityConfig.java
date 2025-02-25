@@ -116,6 +116,21 @@ public class SecurityConfig {
             .scope(OidcScopes.OPENID)
             .build();
 
+    RegisteredClient registeredClient2 =
+        RegisteredClient
+            .withId(UUID.randomUUID().toString()) // client unique id (internal)
+            .clientId("client2") // external client identifier
+            .clientSecret("secret2") // client password
+            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+            .authorizationGrantTypes(grantTypes -> {
+              grantTypes.add(AuthorizationGrantType.AUTHORIZATION_CODE);
+            })
+            .redirectUri("http://localhost:6060/login/oauth2/code/my_authorization_server")
+            // Defines a purpose for the request of an access token.
+            // The scope can be used later in authorization rules.
+            .scope(OidcScopes.OPENID)
+            .build();
+
 
     RegisteredClient resourceServer =
         RegisteredClient
@@ -128,6 +143,7 @@ public class SecurityConfig {
 
     return new InMemoryRegisteredClientRepository(
         registeredClient,
+        registeredClient2,
         resourceServer);
   }
 
